@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MDL_INSCRIPTION</title>
+</head>
+<body>
+
+    <header>
+        <nav style="text-align: center; text-decoration: dashed;">
+            <ul>
+                <li style="display: inline-block; margin: 1.2rem; font-size: x-large;"><span style="display: inline-block; width: 4.5rem; vertical-align: middle;"><img style="display: block; width: 100%;"  src="assets/logo/Logo_MDL.png" alt="LOGO"></span></li>
+                <li style="display: inline-block; margin: 1.2rem; font-size: x-large;"><a href="./inscription_user.html">Inscription</a></li>
+                <li style="display: inline-block; margin: 1.2rem; font-size: x-large;"><a href="./connexion_user.html">Connexion</a></li>
+                <li style="display: inline-block; margin: 1.2rem; font-size: x-large;"><a href="#">Admin</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section style="text-align: center;position: relative; left: 2%;max-width: 96%">
+        <h1>
+            MAISON DES LIGUES TOUS LES SPORTS
+        </h1>
+    </section> 
+
+    <style>
+       input[type=number], input[type=text], input[type=password], input[type=email] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #c23b3b;
+  box-sizing: border-box;
+}
+    </style>
+
+    <form action="#" method="post">
+        <fieldset>
+            <legend>INSCRIPTION</legend>
+            <label for="">Nom</label><input type="text">
+            <label for="">Prénom</label><input type="text">
+            <label for="">Age</label><input type="number" min="0" max="125">
+            <label for="">Ville</label><input type="text">
+            <label for="">E-mail</label><input type="email">
+            <label for="">Choisir un mot de passe</label><input type="password">
+            <label for="">Télécharger une photo</label><input type="file">
+        </fieldset>
+    </form>
+    
+</body>
+</html>
