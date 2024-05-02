@@ -1,0 +1,86 @@
+nav {
+    text-align: center; text-decoration: dashed;
+}
+
+nav li {
+    display: inline-block; margin: 1.2rem; font-size: x-large;
+}
+
+.logo {
+    display: inline-block; width: 4.5rem; vertical-align: middle;
+}
+
+.logo img {
+    display: block; width: 100%;
+}
+
+main {
+    height: 100vh; overflow-y: scroll; overflow-x: hidden;
+}
+
+.content {
+    text-align: center;position: relative; left: 2%;
+    max-width: 96%; margin-bottom: 1.5rem;
+}
+
+.main_container {
+    position: relative; left: 2%;max-width: 96%; 
+    display: flex; flex-direction: row; 
+    flex-wrap: wrap; margin: 0 auto;
+}
+
+.event_container {
+    border: solid; width:45%; height: auto; margin: 0.5rem;
+}
+
+.event_image {
+    display:block; width: 25%;
+}
+
+.btn_start {
+    text-align: center; margin: 1.2rem;
+}
+
+.span_image {
+    width: 90%;
+}
+
+.span_image img {
+    display: block; max-width: 100%; 
+    position: relative; left: 20%; right: 50%;
+}
+
+.footer {
+    text-align: center;
+}
+
+/*formulaire inscription*/
+input[type=number], input[type=text], input[type=password], input[type=email], input[type=file], textarea {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #c23b3b;
+  box-sizing: border-box;
+}
+
+.form_container {
+    text-align: center;
+}
+
+form {
+    width: 40%;
+    position: relative;
+    left: 30%;
+}
+
+/*formulaire connexion */
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+  }
+  
+  img.avatar {
+    width: 40%;
+    border-radius: 50%;
+  }

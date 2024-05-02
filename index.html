@@ -4,26 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MAISON DES LIGUES</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <header>
         <nav style="text-align: center; text-decoration: dashed;">
             <ul>
-                <li style="display: inline-block; margin: 1.2rem; font-size: x-large;"><span style="display: inline-block; width: 4.5rem; vertical-align: middle;"><img style="display: block; width: 100%;"  src="assets/logo/Logo_MDL.png" alt="LOGO"></span></li>
-                <li style="display: inline-block; margin: 1.2rem; font-size: x-large;"><a href="pages/inscription_user.html">Inscription</a></li>
-                <li style="display: inline-block; margin: 1.2rem; font-size: x-large;"><a href="pages/connexion_user.html">Connexion</a></li>
-                <li style="display: inline-block; margin: 1.2rem; font-size: x-large;"><a href="#">Admin</a></li>
+                <li><span class="logo"><img src="assets/logo/Logo_MDL.png" alt="LOGO"></span></li>
+                <li><a href="pages/inscription_user.html">Inscription</a></li>
+                <li><a href="pages/connexion_user.html">Connexion</a></li>
+                <li><a href="#">Admin</a></li>
+                <!--Soit gerer la redirection lors d ela connexion 
+                    ou bien creer un epage special pour admin -->
             </ul>
         </nav>
     </header>
-    <main style="height: 100vh; overflow-y: scroll; overflow-x: hidden;">
-        <section style="text-align: center;position: relative; left: 2%;max-width: 96%">
+    <main >
+        <section class="content" >
             <h1>
                 MAISON DES LIGUES TOUS LES SPORTS
             </h1>
         </section>
         
-        <section style="text-align: center;position: relative; left: 2%;max-width: 96%; margin-bottom: 1.5rem;">
+        <section class="content" >
             <h1>
                 Prêt(e) à la compétition? Cliquez sur le bouton pour commencer
             </h1>
@@ -34,40 +37,39 @@
             </article>
         </section>
     
-        <section style="position: relative; left: 2%;max-width: 96%; display: flex; flex-direction: row; flex-wrap: wrap; margin: 0 auto;">
-            <article style="border: solid; width:45%; height: auto; margin: 0.5rem; "> <img style="display:block; width: 25%;" src="assets/logo/Boost.png" alt=""> <p></p> </article>
-            <article style="border: solid; width:45%; height: auto; margin: 0.5rem; "> <img style="display:block; width: 25%;" src="assets/logo/Boostrap.jpg" alt=""> <p></p> </article>
-            <article style="border: solid; width:45%; height: auto; margin: 0.5rem; "> <img style="display:block; width: 25%;" src="assets/logo/Boostrap.png" alt=""> <p></p> </article>
-            <article style="border: solid; width:45%; height: auto; margin: 0.5rem; "> <img style="display:block; width: 25%;" src="assets/logo/CSS.jpeg" alt=""> <p></p> </article>
+        <section class="main_container" style="position: relative; left: 2%;max-width: 96%; display: flex; flex-direction: row; flex-wrap: wrap; margin: 0 auto;">
+            <article class="event_container" > <img class="event_image" src="assets/logo/Boost.png" alt=""> <p></p> </article>
+            <article class="event_container" > <img class="event_image" src="assets/logo/Boostrap.jpg" alt=""> <p></p> </article>
+            <article class="event_container" > <img class="event_image" src="assets/logo/Boostrap.png" alt=""> <p></p> </article>
+            <article class="event_container" > <img class="event_image" src="assets/logo/CSS.jpeg" alt=""> <p></p> </article>
     
-            <article style="border: solid; width:45%; height: auto; margin: 0.5rem; "> <img style="display:block; width: 25%;" src="assets/logo/CSS.png" alt=""> <p></p> </article>
-            <article style="border: solid; width:45%; height: auto; margin: 0.5rem; "> <img style="display:block; width: 25%;" src="assets/logo/css3-logo.png" alt=""> <p></p> </article>
-            <article style="border: solid; width:45%; height: auto; margin: 0.5rem; "> <img style="display:block; width: 25%;" src="assets/logo/HTML.jpeg" alt=""> <p></p> </article>
-            <article style="border: solid; width:45%; height: auto; margin: 0.5rem; "> <img style="display:block; width: 25%;" src="assets/logo/HTML.png" alt=""> <p></p> </article>
+            <article class="event_container" > <img class="event_image" src="assets/logo/CSS.png" alt=""> <p></p> </article>
+            <article class="event_container" > <img class="event_image" src="assets/logo/css3-logo.png" alt=""> <p></p> </article>
+            <article class="event_container" > <img class="event_image" src="assets/logo/HTML.jpeg" alt=""> <p></p> </article>
+            <article class="event_container" > <img class="event_image" src="assets/logo/HTML.png" alt=""> <p></p> </article>
     
-            <article style="border: solid; width:45%; height: auto; margin: 0.5rem; "> <img style="display:block; width: 25%;" src="assets/logo/HTML1.jpeg" alt=""> <p></p> </article>
-            <article style="border: solid; width:45%; height: auto; margin: 0.5rem; "> <img style="display:block; width: 25%;" src="assets/logo/HTML2.png" alt=""> <p></p> </article>
-            <article style="border: solid; width:45%; height: auto; margin: 0.5rem; "> <img style="display:block; width: 25%;" src="assets/logo/image-260nw-1315562843.webp" alt=""> <p></p> </article>
-            <article style="border: solid; width:45%; height: auto; margin: 0.5rem; "> <img style="display:block; width: 25%;" src="assets/logo/JS.jpg" alt=""> <p></p> </article>
+            <article class="event_container" > <img class="event_image" src="assets/logo/HTML1.jpeg" alt=""> <p></p> </article>
+            <article class="event_container" > <img class="event_image" src="assets/logo/HTML2.png" alt=""> <p></p> </article>
+            <article class="event_container" > <img class="event_image" src="assets/logo/image-260nw-1315562843.webp" alt=""> <p></p> </article>
+            <article class="event_container" > <img class="event_image" src="assets/logo/JS.jpg" alt=""> <p></p> </article>
     
-            <article style="border: solid; width:45%; height: auto; margin: 0.5rem; "> <img style="display:block; width: 25%;" src="assets/logo/JS.jpg" alt=""> <p></p> </article>
-            <article style="border: solid; width:45%; height: auto; margin: 0.5rem; "> <img style="display:block; width: 25%;" src="assets/logo/JS.png" alt=""> <p></p> </article>
-            <article style="border: solid; width:45%; height: auto; margin: 0.5rem; "> <img style="display:block; width: 25%;" src="assets/logo/markdown (1).png" alt=""> <p></p> </article>
-            <article style="border: solid; width:45%; height: auto; margin: 0.5rem; "> <img style="display:block; width: 25%;" src="assets/logo/markdown-1200-628.jpg" alt=""> <p></p> </article>
+            <article class="event_container" > <img class="event_image" src="assets/logo/JS.jpg" alt=""> <p></p> </article>
+            <article class="event_container" > <img class="event_image" src="assets/logo/JS.png" alt=""> <p></p> </article>
+            <article class="event_container" > <img class="event_image" src="assets/logo/markdown (1).png" alt=""> <p></p> </article>
+            <article class="event_container" > <img class="event_image" src="assets/logo/markdown-1200-628.jpg" alt=""> <p></p> </article>
         </section>
     
-        <form action="pages/inscription_user.html" style="text-align: center; margin: 1.2rem;">
+        <form class="btn_start" action="pages/inscription_user.html">
             <button>Cliquer pour vous inscrire</button>
         </form>
     
-        <span style="width: 90%; ">
-            <img style="display: block; max-width: 100%; position: relative; left: 20%; right: 50%;" src="assets/en_construction.jpg" alt="en_construction">
+        <span class="span_image" >
+            <img src="assets/en_construction.jpg" alt="en_construction">
         </span>
     
     </main>
 
-
-    <footer style="text-align: center;">
+    <footer class="footer">
         &copy; - Maison_des_ligues - <a href="#">LNS</a> - 2024
     </footer>
 </body>

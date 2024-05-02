@@ -3,34 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MDL_INSCRIPTION</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <title>Inscription Maison des ligues</title>
 </head>
 <body>
-
-    <header>
-        <nav>
-            <ul>
-                <li><span class="logo"><img src="assets/logo/Logo_MDL.png" alt="LOGO"></span></li>
-                <li><a href="./inscription_user.html">Inscription</a></li>
-                <li><a href="./connexion_user.html">Connexion</a></li>
-                <li><a href="#">Admin</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <section style="text-align: center;position: relative; left: 2%;max-width: 96%">
-        <h1>
-            MAISON DES LIGUES TOUS LES SPORTS
-        </h1>
-    </section> 
-
-<section class="form_container" >
-
-    <h1>
-        Inscription
-    </h1>
-    <form action="#" method="post">
+    <section>
+        <form method="post" action="<?php print $_SERVER["PHP_SELF"]; ?>" id="registration-form" class="registration-form">
         <fieldset class="container">
             <legend>Créer votre compte</legend>
             <label for="nom">Nom</label>
@@ -39,11 +16,11 @@
             <label for="prenom">Prénom</label>
             <input type="text" id="name" name="nom" placeholder="Votre prénom" aria-required="true">
             
-            <label for="prenom">Age</label>
+            <label for="age">Age</label>
             <input type="number" min="0" max="130" id="age" name="age" placeholder="Votre âge" aria-required="true">
             
             <label for="mail">Mail</label>
-            <input type="email" id="prenom" name="email" placeholder="Votre mail" required aria-required="true">
+            <input type="email" id="mail" name="mail" placeholder="Votre mail" required aria-required="true">
             
             <label for="login">Identifiant</label>
             <input type="text" id="login" name="login" placeholder="Votre identifiant" required aria-required="true">
@@ -59,10 +36,8 @@
             
             <hr>
             <input type="submit" class="registerbtn" name="inscription" value="CRÉER UN COMPTE">
-        </fieldset>    
-    </form>
-</section>
-    
-    
+        </fieldset>                
+        </form>
+    </section>
 </body>
 </html>
