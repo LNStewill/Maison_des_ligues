@@ -20,7 +20,7 @@
             <input type="number" min="0" max="130" id="age" name="age" placeholder="Votre âge" aria-required="true">
             
             <label for="mail">Mail</label>
-            <input type="email" id="mail" name="mail" placeholder="Votre mail" required aria-required="true">
+            <input type="email" id="email" name="email" placeholder="Votre mail" required aria-required="true">
             
             <label for="login">Identifiant</label>
             <input type="text" id="login" name="login" placeholder="Votre identifiant" required aria-required="true">
@@ -32,7 +32,7 @@
             <input type="text" id="ville" name="ville" placeholder="Votre ville" required aria-required="true">
             
             <label for="image">Telecharger votre photo</label>
-            <input type="file" id="image_profile" name="image" required aria-required="true">
+            <input type="file" id="image_profile" name="image_profile" accept="image/*" required aria-required="true">
             
             <hr>
             <input type="submit" class="registerbtn" name="inscription" value="CRÉER UN COMPTE">

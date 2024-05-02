@@ -1,8 +1,8 @@
 <?php
 
-class UserSubscription {
+class EventSubscription {
 
-    static function insertUser() {
+    static function insertEvent() {
         require_once "config.inc.php"; # Inclure le fichier de configuration de la base de données
 
         require_once "connection_bdd.php";
@@ -10,17 +10,13 @@ class UserSubscription {
             // Vérifier si le formulaire a été soumis
             if ($_SERVER["REQUEST_METHOD"] == "POST") { 
                 // Récupérer les données en entrée du formulaire
-                $nom= $_POST['nom'];
-                $prenom = $_POST['prenom'];
-                $mail = $_POST["email"];
-                $login = $_POST["login"];
-                $mot_de_passe = $_POST["mot_de_passe"];
-                $ville = $_POST["ville"];
-                $image_profile = $_POST["image_profile"];
+                $image_event= $_POST['image_event'];
+                $titre_event = $_POST['titre_event'];
+                $description = $_POST["description"];
 
         
-                // Vérifier si l'utilisateur existe déjà dans la base de données
-                $_requete_Verif = $connexion->prepare("SELECT id FROM utilisateurs WHERE mail = ?");
+                // Vérifier si l'evenement existe déjà dans la base de données
+                $_requete_Verif = $connexion->prepare("SELECT id FROM evenement WHERE titre_event = ?");
         
                 $_requete_Verif->bindParam(1, $mail);
                 $_requete_Verif->bindParam(2, $login);
@@ -103,4 +99,4 @@ class UserSubscription {
 }
 
 // Utilisation
-UserSubscription::insertUser();
+EventSubscription::insertEvent();
