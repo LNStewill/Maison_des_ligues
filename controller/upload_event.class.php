@@ -17,7 +17,19 @@ class EventSubscription {
                 $description = $_POST['description'];
                 $image_event = $_FILES['image_event']['tmp_name'];
         
-                // Vérifier si l'evenement existe déjà dans la base de données
+                
+        
+                    // L'event n'existe pas, procéder à l'insertion
+                    if (empty($image_event) || empty($titre_event) || empty($description)) {
+                        $_SESSION['errors'][] ="Tous les champs sont obligatoires ";
+                        print '<p class="warning msg-alert">Tous les champs sont obligatoires ou mail invalide</p>';
+                        
+                        // Rediriger vers la page d'inscription
+                        #header("Location: ./index.php");
+                        exit;                       
+        
+                    } else {
+                        // Vérifier si l'evenement existe déjà dans la base de données
                 $_requete_Verif = $connexion->prepare("SELECT id_event FROM evenement WHERE titre_event = ?");
         
                 $_requete_Verif->bindParam(1, $titre_event);
@@ -33,17 +45,6 @@ class EventSubscription {
                 } 
                 else 
                 {
-        
-                    // L'event n'existe pas, procéder à l'insertion
-                    if (empty($image_event) && empty($titre_event) && empty($description)) {
-                        $_SESSION['errors'][] ="Tous les champs sont obligatoires ";
-                        print '<p class="warning msg-alert">Tous les champs sont obligatoires ou mail invalide</p>';
-                        
-                        // Rediriger vers la page d'inscription
-                        #header("Location: ./index.php");
-                        exit;                       
-        
-                    } else {
 
                         #verification image si tout est ok !
 
