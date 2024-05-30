@@ -16,89 +16,116 @@ class UserSubscription {
                 $login = $_POST["login"];
                 $mot_de_passe = $_POST["mot_de_passe"];
                 $ville = $_POST["ville"];
-                $image_profile = $_POST["image_profile"];
+                $image_profile = $_FILES['image_profile']['tmp_name'];
+                #$image_profile = isset($_POST['use_default_avatar']) ? 'default_avatar.jpg' : $_FILES['image_profile']['tmp_name'];
 
-        
-                // Vérifier si l'utilisateur existe déjà dans la base de données
-                $_requete_Verif = $connexion->prepare("SELECT id FROM utilisateurs WHERE mail = ?");
-        
-                $_requete_Verif->bindParam(1, $mail);
-                $_requete_Verif->bindParam(2, $login);
-                $_requete_Verif->execute();
-               
-                if ($_requete_Verif->rowCount() > 0) {
+                #Verifier si les champs sont remplis
+
+                if (empty($nom) || empty($mail) || empty($login) || empty($mot_de_passe)) {
+                    $_SESSION['errors'][] ="Les champs noms, mails, login, mot_de_passe sont obligatoires";
+                    #print '<p class="warning msg-alert">Tous les champs sont obligatoires</p>';
                     
-                    // L'utilisateur existe déjà, stocker un message d'erreur dans la session
-                    $_SESSION['errors'][] = "Cette adresse e-mail est déjà enregistrée. Choisissez une autre adresse e-mail.";
-                    // L'utilisateur existe déjà, afficher un message d'erreur
-                    #print '<p class="warning msg-alert">Cette adresse e-mail est déjà enregistrée. Choisissez une autre adresse e-mail.</p>';
-                } 
-                else 
-                {
-                    // L'utilisateur n'existe pas, procéder à l'insertion
-                    if (empty($nom) && empty($prenom) && empty($mail) && empty($mot_de_passe) && filter_var($mail, FILTER_VALIDATE_EMAIL)) {
-                        $_SESSION['errors'][] ="Tous les champs sont obligatoires ou mail invalide";
-                        #print '<p class="warning msg-alert">Tous les champs sont obligatoires ou mail invalide</p>';
-                        
-                        // Rediriger vers la page d'inscription
-                        header("Location: ./index.php");
-                        exit;                       
-        
-                    } else {
+                    // Rediriger vers la page d'inscription
+                    #header("Location: ./index.php");
+                    exit;                       
+    
+                } else {
 
-                        if ($_FILES["image_profile"]["error"] == UPLOAD_ERR_OK) {
-                            $photo_name = htmlspecialchars(basename($_FILES["image_profile"]["name"]));
-                            
+                    if (!filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL)) {
+                        # vérification si le format du mail est correcte
+                       $_SESSION['login_errors'][] ="Veuillez renseigner un mail valide";
+                   }
+   
+                   else {
+                         
+                    // Vérifier si l'utilisateur existe déjà dans la base de données
+                    $_requete_Verif = $connexion->prepare("SELECT id FROM utilisateurs WHERE mail = ? OR login = ?");
+            
+                    $_requete_Verif->bindParam(1, $mail);
+                    $_requete_Verif->bindParam(2, $login);
+                    $_requete_Verif->execute();
+                
+                    if ($_requete_Verif->rowCount() > 0) {
+                        
+                        // L'utilisateur existe déjà, stocker un message d'erreur dans la session
+                        $_SESSION['errors'][] = "Cette adresse e-mail et ou login est déjà enregistrée. Choisissez en un autre.";
+                        // L'utilisateur existe déjà, afficher un message d'erreur
+                        #print '<p class="warning msg-alert">Cette adresse e-mail est déjà enregistrée. Choisissez une autre adresse e-mail.</p>';
+                    } 
+                    else {
+                        // L'utilisateur n'existe pas, procéder à l'insertion
+
+                        #verification image si tout est ok !
+
+                        if (isset($_FILES['image_profile']) && $_FILES['image_profile']['error'] === UPLOAD_ERR_OK) {
+
+
+                            $photo_name = htmlspecialchars(pathinfo($_FILES["image_profile"]["name"],PATHINFO_FILENAME));
+                            $photo_extension = strtolower(pathinfo($_FILES["image_profile"]["name"], PATHINFO_EXTENSION));
+
                             # Vérifier l'extension et autoriser une extention
                             $allowed_extensions = array("jpg", "jpeg", "png");
-                            $photo_extension = strtolower(pathinfo($photo_name, PATHINFO_EXTENSION));
-                    
+
                             if (!in_array($photo_extension, $allowed_extensions)) {
                                 $errors[] = "L'extension de la photo doit être jpg, jpeg, ou png.";
                             }
-                    
+
                             # Vérifier la taille maximale (2 Mo ici, mais tu peux ajuster selon tes besoins)
                             $max_size = 2 * 1024 * 1024; # 2 Mo
                             if ($_FILES["image_profile"]["size"] > $max_size) {
                                 $errors[] = "La taille de la photo ne doit pas dépasser 2 Mo.";
                             }
-                    
-                            move_uploaded_file($_FILES["image_profile"]["tmp_name"], "uploads/membre" . $photo_name);
-                        } else {
-                            $errors[] = "Erreur lors du téléchargement de la photo.";
-                        }
 
-                        $motDePasseHash = password_hash($mot_de_passe, PASSWORD_DEFAULT);
-            
-                        // Préparer la requête SQL pour insérer les données dans la base de données
-                        $requete = $connexion->prepare("INSERT INTO utilisateurs (nom, prenom, email, mot_de_passe, ville) VALUES (?, ?, ?, ?, ?)");
+                            #renommer la photo pour éviter l'enregistrement du meme nom afin de bien gerer l'affichage
+
+                            $photo_name = $photo_name.'_'.date("Ymd_His").'.'. $photo_extension;
+
+                            $image_profile = $photo_name;
+
+                            $motDePasseHash = password_hash($mot_de_passe, PASSWORD_DEFAULT);
                 
-                        // Stockez les informations dans des variables de session
-                        $_SESSION['nom'] = $nom;
-                        $_SESSION['prenom'] = $prenom;
-
-                        // Binder les paramètres
-                        $requete->bindParam(1, $nom);
-                        $requete->bindParam(2, $prenom);
-                        $requete->bindParam(3, $mail);
-                        $requete->bindParam(4, $motDePasseHash);
-
-                        // Exécuter la requête
-                        $requete->execute();
-                        // Stocker un message de succès dans la session
-                        $_SESSION['success_message'][] = "Bonjour ".$prenom ." ". $nom . " Inscription réussie ! Vous pouvez maintenant vous connecter.";
-
-                        // Rediriger vers la page de connexion (ou toute autre page souhaitée)
-                        #header("Location: ./src/connexion.php");
-                        exit;
+                            // Préparer la requête SQL pour insérer les données dans la base de données
+                            $requete = $connexion->prepare("INSERT INTO utilisateurs (nom, prenom, email, mot_de_passe, ville, image_profile) VALUES (?, ?, ?, ?, ?, ?)");
                     
+                            // Stockez les informations dans des variables de session
+                            $_SESSION['nom'] = $nom;
+                            $_SESSION['prenom'] = $prenom;
+
+                            // Binder les paramètres
+                            $requete->bindParam(1, $nom);
+                            $requete->bindParam(2, $prenom);
+                            $requete->bindParam(3, $mail);
+                            $requete->bindParam(4, $motDePasseHash);
+                            $requete->bindParam(5, $ville);
+                            $requete->bindParam(6, $image_profile);
+
+                            // Exécuter la requête
+                            $requete->execute();
+                            if ($requete->execute()) {
+
+                                #Stocker dans le repertoire le fichier temporaire uploadé
+                                $uploads = "./../uploads/profile/";
+                                move_uploaded_file($_FILES["image_profile"]["tmp_name"], $uploads . $photo_name);
+
+                                 // Stocker un message de succès dans la session
+                                $_SESSION['success_message'][] = "Bonjour ".$prenom ." ". $nom . " Inscription réussie ! Vous pouvez maintenant vous connecter.";
+
+                                // Rediriger vers la page de connexion (ou toute autre page souhaitée)
+                                #header("Location: ./src/confirmation_inscription.php");
+
+                        }
+                           
+                            exit;
+
+                        } else {
+                            $_SESSION['errors'][] = "Erreur lors du téléchargement de la photo.";
+                        }
                     }
                 }
-        
                 // Fermer la connexion
                 $connexion = null;
-                
             }
+        }    
     }
 }
 

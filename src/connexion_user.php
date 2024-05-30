@@ -21,6 +21,8 @@
                     <label for="">Login</label><input type="text">
                     <label for="">Choisir un mot de passe</label><input type="password">
                 </div>
+                <hr>
+                <input type="submit" class="loginbtn" name="connexion" value="Se Connecter">
                 </fieldset>
         </form>
 

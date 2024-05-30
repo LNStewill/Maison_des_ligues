@@ -5,14 +5,12 @@ class EventSubscription {
     static function insertEvent() {
         require_once "config.inc.php"; # Inclure le fichier de configuration de la base de données
 
-        require_once "connection_bdd.php";
-
-        #$image_event =" ";
+        require_once "connection_bdd.php"; # Inclure le fichier de connexion à la base de données
 
         // Vérifier si le formulaire a été soumis
         if ($_SERVER["REQUEST_METHOD"] == "POST") { 
 
-            if (isset($_FILES['image_event']) && $_FILES['image_event']['error'] === UPLOAD_ERR_OK) {
+            #if (isset($_FILES['image_event']) && $_FILES['image_event']['error'] === UPLOAD_ERR_OK) {
                 // Récupérer les données en entrée du formulaire
                 
                 $titre_event = $_POST['titre_event'];
@@ -46,92 +44,77 @@ class EventSubscription {
                         exit;                       
         
                     } else {
+
                         #verification image si tout est ok !
 
-                    /*if ($_FILES["image_event"]["error"] == UPLOAD_ERR_OK) {
-                        $photo_name = htmlspecialchars(pathinfo($_FILES["image_event"]["name"],PATHINFO_FILENAME));
-                        
-                        # Vérifier l'extension et autoriser une extention
-                        $allowed_extensions = array("jpg", "jpeg", "png");
-                        $photo_extension = strtolower(pathinfo($photo_name, PATHINFO_EXTENSION));
+                        if (isset($_FILES['image_event']) && $_FILES['image_event']['error'] === UPLOAD_ERR_OK) {
+
+
+                            $photo_name = htmlspecialchars(pathinfo($_FILES["image_event"]["name"],PATHINFO_FILENAME));
+                            $photo_extension = strtolower(pathinfo($_FILES["image_event"]["name"], PATHINFO_EXTENSION));
+
+                            # Vérifier l'extension et autoriser une extention
+                            $allowed_extensions = array("jpg", "jpeg", "png");
+
+                            if (!in_array($photo_extension, $allowed_extensions)) {
+                                $errors[] = "L'extension de la photo doit être jpg, jpeg, ou png.";
+                            }
+
+                            # Vérifier la taille maximale (2 Mo ici, mais tu peux ajuster selon tes besoins)
+                            $max_size = 2 * 1024 * 1024; # 2 Mo
+                            if ($_FILES["image_event"]["size"] > $max_size) {
+                                $errors[] = "La taille de la photo ne doit pas dépasser 2 Mo.";
+                            }
+
+                            #renommer la photo pour éviter l'enregistrement du meme nom afin de bien gerer l'affichage
+
+                            $photo_name = $photo_name.'_'.date("Ymd_His").'.'. $photo_extension;
+
+                            $image_event = $photo_name;
                 
-                        if (!in_array($photo_extension, $allowed_extensions)) {
-                            $errors[] = "L'extension de la photo doit être jpg, jpeg, ou png.";
-                        }
+                            // Préparer la requête SQL pour insérer les données dans la base de données
+                            $requete = $connexion->prepare("INSERT INTO evenement (image_event, titre_event, description) VALUES (?, ?, ?)");
+                    
+                            // Stockez les informations dans des variables de session
+                            #$_SESSION['nom'] = $nom;
+                            #$_SESSION['prenom'] = $prenom;
 
-                        
-                        # Vérifier la taille maximale (2 Mo ici, mais tu peux ajuster selon tes besoins)
-                        $max_size = 2 * 1024 * 1024; # 2 Mo
-                        if ($_FILES["image_event"]["size"] > $max_size) {
-                            $errors[] = "La taille de la photo ne doit pas dépasser 2 Mo.";
-                        }
+                            // Binder les paramètres
+                            $requete->bindParam(1, $image_event);
+                            $requete->bindParam(2, $titre_event);
+                            $requete->bindParam(3, $description);
 
-                        #renommer la photo
-                        $photo_name = $photo_name.'_'.date("Ymd_His").'.'. $photo_extension;
+                            // Exécuter la requête
+                            $requete->execute();
 
-                        $uploads = "./../uploads/event";
-                
-                        move_uploaded_file($_FILES["image_event"]["tmp_name"], $uploads . $photo_name);
-                    } else {
-                        $_SESSION['errors'][] = "Erreur lors du téléchargement de la photo.";
-                    }*/
+                            if ($requete->execute()) {
 
-                    #$image_event = $photo_name;
-                    $photo_name = htmlspecialchars(pathinfo($_FILES["image_event"]["name"],PATHINFO_FILENAME));
-                    $photo_extension = strtolower(pathinfo($_FILES["image_event"]["name"], PATHINFO_EXTENSION));
+                                $uploads = "./../uploads/event/";
+                                
+                                move_uploaded_file($_FILES["image_event"]["tmp_name"], $uploads . $photo_name);
 
-                    $photo_name = $photo_name.'_'.date("Ymd_His").'.'. $photo_extension;
+                                // Stocker un message de succès dans la session
+                                #$_SESSION['success_message'][] = "Bonjour ".$prenom ." ". $nom . " Inscription réussie ! Vous pouvez maintenant vous connecter.";
 
-                    #mettre ça apres l'insertion des donnes dans la bdd
-                    /*$uploads = "./../uploads/event";
-                
-                    move_uploaded_file($_FILES["image_event"]["tmp_name"], $uploads . $photo_name);*/
-
-                        $image_event = $photo_name;
-            
-                        // Préparer la requête SQL pour insérer les données dans la base de données
-                        $requete = $connexion->prepare("INSERT INTO evenement (image_event, titre_event, description) VALUES (?, ?, ?)");
-                
-                        // Stockez les informations dans des variables de session
-                        #$_SESSION['nom'] = $nom;
-                        #$_SESSION['prenom'] = $prenom;
-
-                        // Binder les paramètres
-                        $requete->bindParam(1, $image_event);
-                        $requete->bindParam(2, $titre_event);
-                        $requete->bindParam(3, $description);
-
-                        // Exécuter la requête
-                        $requete->execute();
-
-                        if ($requete->execute()) {
-
-                            $uploads = "./../uploads/event";
-                            
-                            move_uploaded_file($_FILES["image_event"]["tmp_name"], $uploads . $photo_name);
-
-                            // Stocker un message de succès dans la session
-                            #$_SESSION['success_message'][] = "Bonjour ".$prenom ." ". $nom . " Inscription réussie ! Vous pouvez maintenant vous connecter.";
-
-                            // Rediriger vers la page de connexion (ou toute autre page souhaitée)
-                            #header("Location: ./src/connexion.php");
+                                // Rediriger vers la page de connexion (ou toute autre page souhaitée)
+                                #header("Location: ./src/connexion.php");
 
                         }
                     
                         exit;
                     
+                        } else {
+                            $_SESSION['errors'][] = "Erreur lors du téléchargement de la photo.";
+                        }
                     }
                 }
         
                 // Fermer la connexion
                 $connexion = null;
                 
-            } else {
-                echo "Erreur lors du téléchargement du fichier.";
-            }
+            } 
         }
     }
-}
 
 // Utilisation
 EventSubscription::insertEvent();

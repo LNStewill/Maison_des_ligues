@@ -9,9 +9,29 @@
     </section> 
 
     <section class="form_container">
-        <form method="post" action="<?php print $_SERVER["PHP_SELF"]; ?>" id="registration-form" class="registration-form">
+        <h1>
+            Inscrivez vous
+        </h1>
+
+        <?php
+        
+        require_once __DIR__."./../controller/register.class.php";
+
+        if (isset($_SESSION['errors'])) {
+            foreach ($_SESSION['errors'] as $error) {
+                echo '<p class="warning msg-alert">' . $error . '</p>';
+            }
+            unset($_SESSION['errors']); // Supprimez les erreurs de la session
+        }
+    ?>
+
+    <br>
+        <form method="post" action="<?php print $_SERVER["PHP_SELF"]; ?>" id="registration-form" class="registration-form" enctype="multipart/form-data">
+        
         <fieldset class="container">
+
             <legend>Créer votre compte</legend>
+
             <label for="nom">Nom</label>
             <input type="text" id="name" name="nom" placeholder="Votre nom" aria-required="true">
             
@@ -32,12 +52,18 @@
             
             <label for="ville">Ville</label>
             <input type="text" id="ville" name="ville" placeholder="Votre ville" required aria-required="true">
+
+            <label for="use_default_avatar">
+            <input type="checkbox" id="use_default_avatar" name="use_default_avatar">
+            Utiliser un avatar par défaut
+        </label>
             
             <label for="image">Telecharger votre photo</label>
             <input type="file" id="image_profile" name="image_profile" accept="image/*" required aria-required="true">
             
             <hr>
             <input type="submit" class="registerbtn" name="inscription" value="CRÉER UN COMPTE">
+
         </fieldset>                
         </form>
     </section>

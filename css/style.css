@@ -119,3 +119,29 @@ form {
     border: solid thick aqua;
     border-radius: 5%;
   }
+
+  .form_container fieldset {
+    padding: 0.7rem;
+  }
+
+  table {
+    table-layout: fixed;
+    width: 100%; /* Largeur totale du tableau */
+}
+
+table {
+    border-collapse: collapse; /* Fusionne les bordures des cellules */
+    width: 100%;
+    background-color: #f9f9f9;
+}
+
+th, td {
+    border: 1px solid #ddd; /* Bordures autour des cellules */
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #333;
+    color: #fff;
+}
