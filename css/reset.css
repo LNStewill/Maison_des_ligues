@@ -1,0 +1,20 @@
+html {
+    font-size: 1rem;
+    font-family: 'Open Sans', sans-serif;
+    background: linear-gradient(to top, rgba(0,0,0,0.5)50%,rgba(0,0,0,0.5)50%);
+    /*/* Utilisez "linear-gradient" pour ajouter un effet d'arrière-plan 
+    plus sombre à l'image (asset/2.jpg). Cela rendra le texte plus facile à lire */
+    background-repeat: no-repeat;
+    background-position: center,top left ;
+    background-size: cover, contain;
+    scroll-behavior: smooth ;/*permet d'animer le defilement ou scroller de façon synchrone et un peu animé et non facadé*/
+
+}
+::-webkit-scrollbar {
+    display: none;
+  }
+
+*{
+    margin: 0.0rem;
+    padding: 0.0rem;
+}

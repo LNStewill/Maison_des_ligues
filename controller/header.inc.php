@@ -8,9 +8,9 @@
         public function __construct() {
             // Determine the appropriate CSS path based on the current page
             if (basename($_SERVER['PHP_SELF']) === 'index.php') {
-                $this->_css = './../css/style.css';
+                $this->_css = './css/style.css';
             } else {
-                $this->_css = './../../css/style.css';
+                $this->_css = './../css/style.css';
             }
         }
     
@@ -24,7 +24,7 @@
 <!DOCTYPE html>
 <html lang="<?= User::$_lang[0]?>">
 <head>
-    <meta name="description" content="Ceci est l'exercice du partiel gmail">
+    <meta name="description" content="Ceci est le projet Web Maison des ligues">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $_user_new->_title ?></title>
@@ -39,17 +39,17 @@
             if (basename($_SERVER['PHP_SELF']) === 'index.php') {
                 echo '<ul>
                 <li><span class="logo"><img src="assets/logo/Logo_MDL.png" alt="LOGO"></span></li>
-                <li><a href="pages/inscription_user.html">Inscription</a></li>
-                <li><a href="pages/connexion_user.html">Connexion</a></li>
+                <li><a href="src/inscription_user.php">Inscription</a></li>
+                <li><a href="src/connexion_user.php">Connexion</a></li>
                 <li><a href="#">Admin</a></li>
                 <!--Soit gerer la redirection lors d ela connexion 
                     ou bien creer un epage special pour admin -->
             </ul>';
             } else {
                 echo '<ul>
-                <li><span class="logo" ><img src="assets/logo/Logo_MDL.png" alt="LOGO"></span></li>
-                <li><a href="./inscription_user.html">Inscription</a></li>
-                <li><a href="./connexion_user.html">Connexion</a></li>
+                <li><span class="logo" ><img src="../assets/logo/Logo_MDL.png" alt="LOGO"></span></li>
+                <li><a href="./inscription_user.php">Inscription</a></li>
+                <li><a href="./connexion_user.php">Connexion</a></li>
                 <li><a href="#">Admin</a></li>
             </ul>';
             }
