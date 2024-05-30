@@ -3,9 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscription Maison des ligues</title>
+    <link rel="stylesheet" href="../css/style.css">
+
+    <title>Inscription Maison des Ligues</title>
 </head>
 <body>
+
+    <header>
+        <nav >
+            <ul>
+                <li><span class="logo" ><img src="assets/logo/Logo_MDL.png" alt="LOGO"></span></li>
+                <li><a href="./inscription_user.php">Inscription</a></li>
+                <li><a href="connexion_user.phph">Connexion</a></li>
+                <li><a href="#">Admin</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section style="text-align: center;position: relative; left: 2%;max-width: 96%">
+        <h1>
+            MAISON DES LIGUES TOUS LES SPORTS
+        </h1>
+    </section> 
+
     <section>
         <form method="post" action="<?php print $_SERVER["PHP_SELF"]; ?>" id="registration-form" class="registration-form">
         <fieldset class="container">

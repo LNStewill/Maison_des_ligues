@@ -13,8 +13,8 @@
         <nav >
             <ul>
                 <li><span class="logo" ><img src="assets/logo/Logo_MDL.png" alt="LOGO"></span></li>
-                <li><a href="./inscription_user.html">Inscription</a></li>
-                <li><a href="./connexion_user.html">Connexion</a></li>
+                <li><a href="./inscription_user.php">Inscription</a></li>
+                <li><a href="./connexion_user.phph">Connexion</a></li>
                 <li><a href="#">Admin</a></li>
             </ul>
         </nav>

@@ -11,9 +11,9 @@
     <header>
         <nav>
             <ul>
-                <li><span class="logo"><img src="assets/logo/Logo_MDL.png" alt="LOGO"></span></li>
-                <li><a href="./inscription_user.html">Inscription</a></li>
-                <li><a href="./connexion_user.html">Connexion</a></li>
+                <li><span class="logo"><img src="../assets/logo/Logo_MDL.png" alt="LOGO"></span></li>
+                <li><a href="./inscription_user.php">Inscription</a></li>
+                <li><a href="./connexion_user.php">Connexion</a></li>
                 <li><a href="#">Admin</a></li>
             </ul>
         </nav>
@@ -30,8 +30,21 @@
     <h1>
         Ajouter une publication
     </h1>
+    <?php
         
-    <form action="#" method="post">
+        require_once __DIR__."./../controller/upload_event.class.php";
+
+        if (isset($_SESSION['errors'])) {
+            foreach ($_SESSION['errors'] as $error) {
+                echo '<p class="warning msg-alert">' . $error . '</p>';
+            }
+            unset($_SESSION['errors']); // Supprimez les erreurs de la session
+        }
+    ?>
+
+    <br>
+        
+    <form action="<?php print $_SERVER["PHP_SELF"]; ?>" method="post">
         <fieldset class="container">
                  
             <label for="image_event">Telecharger la photo de votre sport</label>

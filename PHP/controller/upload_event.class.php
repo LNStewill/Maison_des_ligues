@@ -16,34 +16,33 @@ class EventSubscription {
 
         
                 // Vérifier si l'evenement existe déjà dans la base de données
-                $_requete_Verif = $connexion->prepare("SELECT id FROM evenement WHERE titre_event = ?");
+                $_requete_Verif = $connexion->prepare("SELECT id_event FROM evenement WHERE titre_event = ?");
         
-                $_requete_Verif->bindParam(1, $mail);
-                $_requete_Verif->bindParam(2, $login);
+                $_requete_Verif->bindParam(1, $titre_event);
                 $_requete_Verif->execute();
                
                 if ($_requete_Verif->rowCount() > 0) {
                     
-                    // L'utilisateur existe déjà, stocker un message d'erreur dans la session
-                    $_SESSION['errors'][] = "Cette adresse e-mail est déjà enregistrée. Choisissez une autre adresse e-mail.";
-                    // L'utilisateur existe déjà, afficher un message d'erreur
+                    // L'event existe déjà, stocker un message d'erreur dans la session
+                    $_SESSION['errors'][] = "Un event portant ce titre est déjà enregistrée. Publiez en un autre.";
+                    // L'event existe déjà, afficher un message d'erreur
                     #print '<p class="warning msg-alert">Cette adresse e-mail est déjà enregistrée. Choisissez une autre adresse e-mail.</p>';
                 } 
                 else 
                 {
-                    // L'utilisateur n'existe pas, procéder à l'insertion
-                    if (empty($nom) && empty($prenom) && empty($mail) && empty($mot_de_passe) && filter_var($mail, FILTER_VALIDATE_EMAIL)) {
-                        $_SESSION['errors'][] ="Tous les champs sont obligatoires ou mail invalide";
+                    // L'event n'existe pas, procéder à l'insertion
+                    if (empty($image_event) && empty($titre_event) && empty($description)) {
+                        $_SESSION['errors'][] ="Tous les champs sont obligatoires ";
                         #print '<p class="warning msg-alert">Tous les champs sont obligatoires ou mail invalide</p>';
                         
                         // Rediriger vers la page d'inscription
-                        header("Location: ./index.php");
+                        #header("Location: ./index.php");
                         exit;                       
         
                     } else {
 
-                        if ($_FILES["image_profile"]["error"] == UPLOAD_ERR_OK) {
-                            $photo_name = htmlspecialchars(basename($_FILES["image_profile"]["name"]));
+                        if ($_FILES["image_event"]["error"] == UPLOAD_ERR_OK) {
+                            $photo_name = htmlspecialchars(basename($_FILES["image_event"]["name"]));
                             
                             # Vérifier l'extension et autoriser une extention
                             $allowed_extensions = array("jpg", "jpeg", "png");
@@ -55,34 +54,31 @@ class EventSubscription {
                     
                             # Vérifier la taille maximale (2 Mo ici, mais tu peux ajuster selon tes besoins)
                             $max_size = 2 * 1024 * 1024; # 2 Mo
-                            if ($_FILES["image_profile"]["size"] > $max_size) {
+                            if ($_FILES["image_event"]["size"] > $max_size) {
                                 $errors[] = "La taille de la photo ne doit pas dépasser 2 Mo.";
                             }
                     
-                            move_uploaded_file($_FILES["image_profile"]["tmp_name"], "uploads/membre" . $photo_name);
+                            move_uploaded_file($_FILES["image_event"]["tmp_name"], "uploads/evenement" . $photo_name);
                         } else {
-                            $errors[] = "Erreur lors du téléchargement de la photo.";
+                            $_SESSION['errors'][] = "Erreur lors du téléchargement de la photo.";
                         }
-
-                        $motDePasseHash = password_hash($mot_de_passe, PASSWORD_DEFAULT);
             
                         // Préparer la requête SQL pour insérer les données dans la base de données
-                        $requete = $connexion->prepare("INSERT INTO utilisateurs (nom, prenom, email, mot_de_passe, ville) VALUES (?, ?, ?, ?, ?)");
+                        $requete = $connexion->prepare("INSERT INTO evenement (image_event, titre_event, description) VALUES (?, ?, ?)");
                 
                         // Stockez les informations dans des variables de session
-                        $_SESSION['nom'] = $nom;
-                        $_SESSION['prenom'] = $prenom;
+                        #$_SESSION['nom'] = $nom;
+                        #$_SESSION['prenom'] = $prenom;
 
                         // Binder les paramètres
-                        $requete->bindParam(1, $nom);
-                        $requete->bindParam(2, $prenom);
-                        $requete->bindParam(3, $mail);
-                        $requete->bindParam(4, $motDePasseHash);
+                        $requete->bindParam(1, $image_event);
+                        $requete->bindParam(2, $titre_event);
+                        $requete->bindParam(3, $description);
 
                         // Exécuter la requête
                         $requete->execute();
                         // Stocker un message de succès dans la session
-                        $_SESSION['success_message'][] = "Bonjour ".$prenom ." ". $nom . " Inscription réussie ! Vous pouvez maintenant vous connecter.";
+                        #$_SESSION['success_message'][] = "Bonjour ".$prenom ." ". $nom . " Inscription réussie ! Vous pouvez maintenant vous connecter.";
 
                         // Rediriger vers la page de connexion (ou toute autre page souhaitée)
                         #header("Location: ./src/connexion.php");
