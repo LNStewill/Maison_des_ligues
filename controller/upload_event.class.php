@@ -88,7 +88,7 @@ class EventSubscription {
                             // Exécuter la requête
                             $requete->execute();
 
-                            if ($requete->execute()) {
+                           /* if ($requete->execute()) {
 
                                 $uploads = "./../uploads/event/";
                                 
@@ -100,7 +100,11 @@ class EventSubscription {
                                 // Rediriger vers la page de connexion (ou toute autre page souhaitée)
                                 #header("Location: ./src/connexion.php");
 
-                        }
+                        }*/
+                        $uploads = "./../uploads/event/";
+                                
+                                move_uploaded_file($_FILES["image_event"]["tmp_name"], $uploads . $photo_name);
+
                     
                         exit;
                     

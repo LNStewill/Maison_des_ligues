@@ -16,8 +16,8 @@ class UserSubscription {
                 $login = $_POST["login"];
                 $mot_de_passe = $_POST["mot_de_passe"];
                 $ville = $_POST["ville"];
-                $image_profile = $_FILES['image_profile']['tmp_name'];
-                #$image_profile = isset($_POST['use_default_avatar']) ? 'default_avatar.jpg' : $_FILES['image_profile']['tmp_name'];
+                #$image_profile = $_FILES['image_profile']['tmp_name'];
+                $image_profile = isset($_POST['use_default_avatar']) ? 'default_avatar.png' : $_FILES['image_profile']['tmp_name'];
 
                 #Verifier si les champs sont remplis
 
@@ -111,7 +111,7 @@ class UserSubscription {
                                 $_SESSION['success_message'][] = "Bonjour ".$prenom ." ". $nom . " Inscription réussie ! Vous pouvez maintenant vous connecter.";
 
                                 // Rediriger vers la page de connexion (ou toute autre page souhaitée)
-                                #header("Location: ./src/confirmation_inscription.php");
+                                header("Location: ./src/confirmation_inscription.php");
 
                         }
                            

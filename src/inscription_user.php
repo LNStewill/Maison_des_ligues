@@ -66,6 +66,14 @@
 
         </fieldset>                
         </form>
+
+        <br>
+
+        <form action="connexion_user.php">
+            <button>
+                Déjà inscrit ?  Cliquer pour se connecter
+            </button>
+        </form>
     </section>
 
 
