@@ -42,9 +42,6 @@ main {
     display:block; width: 25%;
 }
 
-.btn_start {
-    text-align: center; margin: 1.2rem;
-}
 
 .span_image {
     width: 90%;
@@ -109,6 +106,10 @@ form {
   .btn_start:hover {
     background-color: #ff7200;
   }
+
+  .btn_start {
+    text-align: center; margin: 1.2rem;
+}
 
   .form_container {
     height: 200vh;
