@@ -19,6 +19,10 @@ main {
     height: 100vh; overflow-y: scroll; overflow-x: hidden;
 }
 
+.confirmation_membre {
+    height: 100vh; overflow-y: scroll; overflow-x: hidden;
+    text-align: center;
+}
 .content {
     text-align: center;position: relative; left: 2%;
     max-width: 96%; margin-bottom: 1.5rem;

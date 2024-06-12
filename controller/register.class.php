@@ -31,7 +31,7 @@ class UserSubscription {
     
                 } else {
 
-                    if (!filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL)) {
+                    if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
                         # vérification si le format du mail est correcte
                        $_SESSION['login_errors'][] ="Veuillez renseigner un mail valide";
                    }
@@ -39,7 +39,7 @@ class UserSubscription {
                    else {
                          
                     // Vérifier si l'utilisateur existe déjà dans la base de données
-                    $_requete_Verif = $connexion->prepare("SELECT id FROM utilisateurs WHERE mail = ? OR login = ?");
+                    $_requete_Verif = $connexion->prepare("SELECT * FROM utilisateur WHERE email = ? OR login = ?");
             
                     $_requete_Verif->bindParam(1, $mail);
                     $_requete_Verif->bindParam(2, $login);
@@ -85,19 +85,17 @@ class UserSubscription {
                             $motDePasseHash = password_hash($mot_de_passe, PASSWORD_DEFAULT);
                 
                             // Préparer la requête SQL pour insérer les données dans la base de données
-                            $requete = $connexion->prepare("INSERT INTO utilisateurs (nom, prenom, email, mot_de_passe, ville, image_profile) VALUES (?, ?, ?, ?, ?, ?)");
-                    
-                            // Stockez les informations dans des variables de session
-                            $_SESSION['nom'] = $nom;
-                            $_SESSION['prenom'] = $prenom;
+                            $requete = $connexion->prepare("INSERT INTO utilisateur (nom, prenom, age, email, login, mot_de_passe, ville, image_profile) VALUES (?, ?, ?, ?, ?, ?)");
 
                             // Binder les paramètres
                             $requete->bindParam(1, $nom);
                             $requete->bindParam(2, $prenom);
-                            $requete->bindParam(3, $mail);
-                            $requete->bindParam(4, $motDePasseHash);
-                            $requete->bindParam(5, $ville);
-                            $requete->bindParam(6, $image_profile);
+                            $requete->bindParam(3, $age);
+                            $requete->bindParam(4, $mail);
+                            $requete->bindParam(5, $login);
+                            $requete->bindParam(6, $motDePasseHash);
+                            $requete->bindParam(7, $ville);
+                            $requete->bindParam(8, $image_profile);
 
                             // Exécuter la requête
                             $requete->execute();
@@ -107,8 +105,15 @@ class UserSubscription {
                                 $uploads = "./../uploads/profile/";
                                 move_uploaded_file($_FILES["image_profile"]["tmp_name"], $uploads . $photo_name);
 
-                                 // Stocker un message de succès dans la session
-                                $_SESSION['success_message'][] = "Bonjour ".$prenom ." ". $nom . " Inscription réussie ! Vous pouvez maintenant vous connecter.";
+                                // Stocker les variables pour la page de confirmation d'inscription
+                                // Stockez les informations dans des variables de session
+                                $_SESSION['nom'] = $nom;
+                                $_SESSION['prenom'] = $prenom;
+                                $_SESSION['email'] = $mail;
+                                $_SESSION['ville'] = $ville;
+                                $_SESSION['image_profile'] = $uploads . $photo_name;
+
+
 
                                 // Rediriger vers la page de connexion (ou toute autre page souhaitée)
                                 header("Location: ./src/confirmation_inscription.php");

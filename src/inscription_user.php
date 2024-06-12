@@ -36,12 +36,12 @@
             <input type="text" id="name" name="nom" placeholder="Votre nom" aria-required="true">
             
             <label for="prenom">Prénom</label>
-            <input type="text" id="name" name="nom" placeholder="Votre prénom" aria-required="true">
+            <input type="text" id="prenom" name="prenom" placeholder="Votre prénom" aria-required="true">
             
             <label for="age">Age</label>
             <input type="number" min="0" max="130" id="age" name="age" placeholder="Votre âge" aria-required="true">
             
-            <label for="mail">Mail</label>
+            <label for="email">Mail</label>
             <input type="email" id="email" name="email" placeholder="Votre mail" required aria-required="true">
             
             <label for="login">Identifiant</label>
