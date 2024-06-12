@@ -85,7 +85,7 @@ class UserSubscription {
                             $motDePasseHash = password_hash($mot_de_passe, PASSWORD_DEFAULT);
                 
                             // Préparer la requête SQL pour insérer les données dans la base de données
-                            $requete = $connexion->prepare("INSERT INTO utilisateur (nom, prenom, age, email, login, mot_de_passe, ville, image_profile) VALUES (?, ?, ?, ?, ?, ?)");
+                            $requete = $connexion->prepare("INSERT INTO utilisateur (nom, prenom, age, email, login, mot_de_passe, ville, image_profile) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 
                             // Binder les paramètres
                             $requete->bindParam(1, $nom);
