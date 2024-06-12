@@ -12,6 +12,7 @@ class UserSubscription {
                 // Récupérer les données en entrée du formulaire
                 $nom= $_POST['nom'];
                 $prenom = $_POST['prenom'];
+                $age = $_POST['age'];
                 $mail = $_POST["email"];
                 $login = $_POST["login"];
                 $mot_de_passe = $_POST["mot_de_passe"];
@@ -99,27 +100,21 @@ class UserSubscription {
 
                             // Exécuter la requête
                             $requete->execute();
-                            if ($requete->execute()) {
+                            #Stocker dans le repertoire le fichier temporaire uploadé
+                            $uploads = "./../uploads/profile/";
+                            move_uploaded_file($_FILES["image_profile"]["tmp_name"], $uploads . $photo_name);
 
-                                #Stocker dans le repertoire le fichier temporaire uploadé
-                                $uploads = "./../uploads/profile/";
-                                move_uploaded_file($_FILES["image_profile"]["tmp_name"], $uploads . $photo_name);
+                            // Stocker les variables pour la page de confirmation d'inscription
+                            // Stockez les informations dans des variables de session
+                            $_SESSION['nom'] = $nom;
+                            $_SESSION['prenom'] = $prenom;
+                            $_SESSION['email'] = $mail;
+                            $_SESSION['ville'] = $ville;
+                            $_SESSION['image_profile'] = $uploads . $photo_name;
 
-                                // Stocker les variables pour la page de confirmation d'inscription
-                                // Stockez les informations dans des variables de session
-                                $_SESSION['nom'] = $nom;
-                                $_SESSION['prenom'] = $prenom;
-                                $_SESSION['email'] = $mail;
-                                $_SESSION['ville'] = $ville;
-                                $_SESSION['image_profile'] = $uploads . $photo_name;
+                            // Rediriger vers la page de connexion (ou toute autre page souhaitée)
+                            header("Location: src/confirmation_inscription.php");
 
-
-
-                                // Rediriger vers la page de connexion (ou toute autre page souhaitée)
-                                header("Location: ./src/confirmation_inscription.php");
-
-                        }
-                           
                             exit;
 
                         } else {
