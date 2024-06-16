@@ -36,7 +36,7 @@ class LoginController {
                             // L'utilisateur est authentifié
                             $_SESSION['user_id'] = $usertab['id_utilisateur'];
                             $_SESSION['user_name'] = $usertab['login'];
-                            header("Location: src/welcome.php");
+                            header("Location: ../src/welcome.php");
 
                             echo'vous etes connecté';
                             exit;

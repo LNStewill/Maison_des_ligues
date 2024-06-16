@@ -36,7 +36,7 @@
                 // Ville (remplacez par la variable appropriée)
                 echo '<li>Votre ville: ' . $ville . '</li>';
                 // Photo (remplacez par la variable appropriée)
-                echo '<li>Photo:<br/> <img src=" '.$photo.' " alt="Votre photo"></li>';
+                echo '<li>Photo:<br/> <img style="width : 100%" src=" '.$photo.' " alt="Votre photo"></li>';
                 echo '</ul>';
 
                 session_destroy();

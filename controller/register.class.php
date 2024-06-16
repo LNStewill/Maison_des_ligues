@@ -113,7 +113,7 @@ class UserSubscription {
                             $_SESSION['image_profile'] = $uploads . $photo_name;
 
                             // Rediriger vers la page de connexion (ou toute autre page souhaitée)
-                            header("Location: src/confirmation_inscription.php");
+                            header("Location: ../src/confirmation_inscription.php");
 
                             exit;
 
