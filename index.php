@@ -30,17 +30,6 @@
             <article class="event_container" > <img class="event_image" src="assets/logo/HTML.jpeg" alt=""> <p></p> </article>
             <article class="event_container" > <img class="event_image" src="assets/logo/HTML.png" alt=""> <p></p> </article>
     
-            <article class="event_container" > <img class="event_image" src="assets/logo/HTML1.jpeg" alt=""> <p></p> </article>
-            <article class="event_container" > <img class="event_image" src="assets/logo/HTML2.png" alt=""> <p></p> </article>
-            <article class="event_container" > <img class="event_image" src="assets/logo/image-260nw-1315562843.webp" alt=""> <p></p> </article>
-            <article class="event_container" > <img class="event_image" src="assets/logo/JS.jpg" alt=""> <p></p> </article>
-    
-            <article class="event_container" > <img class="event_image" src="assets/logo/JS.jpg" alt=""> <p></p> </article>
-            <article class="event_container" > <img class="event_image" src="assets/logo/JS.png" alt=""> <p></p> </article>
-            <article class="event_container" > <img class="event_image" src="assets/logo/markdown (1).png" alt=""> <p></p> </article>
-            <article class="event_container" > <img class="event_image" src="assets/logo/markdown-1200-628.jpg" alt=""> <p></p> </article>
-        </section>
-    
         <form  action="src/inscription_user.php">
             <button class="btn_start">Cliquer pour vous inscrire</button>
         </form>

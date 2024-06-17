@@ -38,7 +38,7 @@
         <?php
             if (basename($_SERVER['PHP_SELF']) === 'index.php') {
                 echo '<ul>
-                <li><span class="logo"><img src="assets/logo/Logo_MDL.png" alt="LOGO"></span></li>
+                <li><a class="logo"  href="index.php"><img src="assets/logo/Logo_MDL.png" alt="LOGO"></a></li>
                 <li><a href="src/inscription_user.php">Inscription</a></li>
                 <li><a href="src/connexion_user.php">Connexion</a></li>
                 <li><a href="#">Admin</a></li>
@@ -47,7 +47,7 @@
             </ul>';
             } else {
                 echo '<ul>
-                <li><span class="logo" ><img src="../assets/logo/Logo_MDL.png" alt="LOGO"></span></li>
+                <li><a class="logo" href="../index.php"><img src="../assets/logo/Logo_MDL.png" alt="LOGO"></a></li>
                 <li><a href="./inscription_user.php">Inscription</a></li>
                 <li><a href="./connexion_user.php">Connexion</a></li>
                 <li><a href="#">Admin</a></li>
