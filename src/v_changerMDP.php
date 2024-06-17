@@ -22,25 +22,26 @@
             Au moins une lettre majuscule
         </p>
         <p>
-            contient au moins des caractere spciazux svts : !, # ou &.        
+            contient au moins des caractere spciaux suivants : !, # ou &.        
         </p>
 
         <p>
             contient au moins un chiffre.        
         </p>
 
+        <br><br><br>
         <?php
         
         require_once __DIR__."./../controller/c_changerMDP.class.php";
 
-        /*if (isset($_SESSION['login_errors'])) {
-            foreach ($_SESSION['login_errors'] as $error) {
+        if (isset($_SESSION['change_mdp_errors'])) {
+            foreach ($_SESSION['change_mdp_errors'] as $error) {
                 echo '<p class="warning msg-alert">' . $error . '</p>';
             }
-            unset($_SESSION['login_errors']); // Supprimez les erreurs de la session
-        }*/
+            unset($_SESSION['change_mdp_errors']); // Supprimez les erreurs de la session
+        }
     ?>
-
+<br><br><br>
 
         <form action="<?php print $_SERVER["PHP_SELF"]; ?>" method="post">
             <fieldset>

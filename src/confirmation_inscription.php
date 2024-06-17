@@ -13,6 +13,12 @@
     <section class="confirmation_membre">
 
         <?php
+
+            if (isset($_SESSION['change_mdp_succes'])) {
+
+                $message =$_SESSION['change_mdp_succes'];
+                echo $message;
+            }
             if (isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['email']) && isset($_SESSION['ville']) && isset($_SESSION['image_profile'])) {
                 $nom = $_SESSION['nom'];
                 $prenom = $_SESSION['prenom'];
