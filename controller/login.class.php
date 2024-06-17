@@ -36,9 +36,21 @@ class LoginController {
                             // L'utilisateur est authentifié
                             $_SESSION['user_id'] = $usertab['id_utilisateur'];
                             $_SESSION['user_name'] = $usertab['login'];
-                            header("Location: ../src/welcome.php");
 
+                            $_indice_connexion = $usertab['indice_first_connexion'];
+
+                            $user_id = $usertab['id_utilisateur'];
+                            
                             echo'vous etes connecté';
+                            if ($_indice_connexion == 1) {
+                                header("Location: ../src/v_changerMDP.php?id=$user_id");#welcome.php
+                            } else {
+                                header("Location: ../src/welcome.php");#welcome.php
+
+                            }
+                            #header("Location: ../src/src/v_changerMDP.php");#welcome.php
+
+                            #echo'vous etes connecté';
                             exit;
                         } else {
                             $_SESSION['login_errors'][] = "Erreur de mot de passe";
