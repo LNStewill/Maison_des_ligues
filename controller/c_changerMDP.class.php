@@ -24,21 +24,21 @@ class UserUpdate {
                     exit;                       
     
                 } else {
-                         
-                    $id = $_GET['id'];
+
+                    if($new_mdp===$new_mdp_confirm) {
+                        $id = $_GET['id'];
+
+                        $value = 2;
                     // Vérifier si l'utilisateur existe déjà dans la base de données
-                    $_requete_changerMDP = $connexion->prepare("UPDATE utilisateur SET mot_de_passe = $new_mdp WHERE id_utilisateur = $id");
+                    $_requete_changerMDP = $connexion->prepare("UPDATE utilisateur SET mot_de_passe = $new_mdp, indice_first_connexion = $value WHERE id_utilisateur = $id");
             
                     $_requete_changerMDP->execute();
                 
-                    if ($_requete_Verif->rowCount() > 0) {
-                        
-                        // L'utilisateur existe déjà, stocker un message d'erreur dans la session
-                        $_SESSION['errors'][] = "Cette adresse e-mail et ou login est déjà enregistrée. Choisissez en un autre.";
-                        // L'utilisateur existe déjà, afficher un message d'erreur
-                        #print '<p class="warning msg-alert">Cette adresse e-mail est déjà enregistrée. Choisissez une autre adresse e-mail.</p>';
-                    } 
-                            exit;
+                    exit;
+                    } else {
+                        echo"les deux mdp doivent correspondent";
+                    }
+                    
 
                 }
                 // Fermer la connexion

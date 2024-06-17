@@ -17,7 +17,16 @@
 
         <p>
             Au moins 8 caracteres 
-            Au moins une lettre majiscule
+        </p>
+        <p>
+            Au moins une lettre majuscule
+        </p>
+        <p>
+            contient au moins des caractere spciazux svts : !, # ou &.        
+        </p>
+
+        <p>
+            contient au moins un chiffre.        
         </p>
 
         <?php
