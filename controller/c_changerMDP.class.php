@@ -3,8 +3,10 @@
 class UserUpdateMDP {
 
     static function updateMDP() {
-
-        $id = $_GET['id'];
+        try {
+            //code...
+            
+            $id = $_GET['id'];
         require_once "config.inc.php"; # Inclure le fichier de configuration de la base de données
 
         require_once "connection_bdd.php";
@@ -60,7 +62,13 @@ class UserUpdateMDP {
                 // Fermer la connexion
                 $connexion = null;
             }
-        }    
+        } catch (\Throwable $th) {
+            //throw $th;
+            $th ="id null" ;
+        }
+            
     }
+
+}    
 // Utilisation
 UserUpdateMDP::updateMDP();
